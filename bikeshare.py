@@ -18,18 +18,18 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-   
+
     while True:
         city = input('\n Which city\'s data would you like to take a look at?').lower()
         if city not in ['chicago', 'new york city', 'washington']:
             print('\n Sorry that wasn\'t an option. Please try again.')
             continue
         else:
-            print('\n You selected: ', city) 
+            print('\n You selected: ', city)
             break
 
     # TO DO: get user input for month (all, january, february, ... , june)
-                  
+
     while True:
         month = input('\n Which month are you interested in seeing data from?').lower()
         if month not in ['all', 'january', 'february', 'march', 'april', 'may', 'june']:
@@ -37,18 +37,18 @@ def get_filters():
             continue
         else:
             print('\n Your selected: ', month)
-            break         
+            break
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
-   
+
     while True:
         day = input('\n Now let\'s get your input for day of the week?').lower()
         if day not in ['all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']:
             print('Please try again. Entry invalid!')
             continue
         else:
-            print('\n You selected: ', day)       
-            break        
+            print('\n You selected: ', day)
+            break
 
     print('-'*40)
     return city, month, day
@@ -65,32 +65,32 @@ def load_data(city, month, day):
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
-       
+
     df = pd.read_csv("chicago.csv")
     df = pd.read_csv("new_york_city.csv")
     df = pd.read_csv("washington.csv")
-    
+
     # convert the Start Time column to datetime
     df['Start Time']=pd.to_datetime(df['Start Time'])
-    
+
     #extract month and day of week from Start Time to create new columns
     df['month']=df['Start Time'].dt.month
     df['day_of_week']=df['Start Time'].dt.weekday_name
-    
+
     #fitler by month if applicable
     if month != 'all':
         months=['january', 'february', 'march', 'april', 'may', 'june']
-        
+
         month = months.index(month) + 1
-        
+
         #filter by month to create new dataframe
         df = df[df['month'] == month]
-        
+
         #filter by day of week if applicable
         if day != 'all':
             #filter by day of week if applicable
             df = df[df['day_of_week'] == day.title()]
-            
+
     return df
 
 
@@ -109,7 +109,7 @@ def time_stats(df):
     print('\nThe most popular day of the week is:', common_day)
 
     # TO DO: display the most common start hour
-    df['hour'] = df['Start Time'].dt.hour 
+    df['hour'] = df['Start Time'].dt.hour
     common_start_hour = df['hour'].mode()[0]
     print('\nThe most popular hour is:', common_start_hour)
 
@@ -126,7 +126,7 @@ def station_stats(df):
 
     # TO DO: display most commonly used start station
     popular_start = df['Start Station'].mode()[0]
-    print('\nThe most popular start station is:', popular_start)                 
+    print('\nThe most popular start station is:', popular_start)
 
     # TO DO: display most commonly used end station
     popular_end = df['End Station'].mode()[0]
@@ -167,38 +167,38 @@ def user_stats(df):
     # TO DO: Display counts of user types
     user_types = df['User Type'].value_counts()
     print('\n These are the user types: ', user_types)
-    
-    # TO DO: Display counts of gender    
+
+    # TO DO: Display counts of gender
     if 'Gender' in df.columns:
         print(df['Gender'].value_counts())
     else:
-        print('\n The Gender column does not exist')    
-                      
+        print('\n The Gender column does not exist')
+
     # TO DO: Display earliest, most recent, and most common year of birth
     if 'Birth Year' in df.columns:
         print(df['Birth Year'].min())
     else:
         print('\n This does not exist')
-     
+
     if 'Birth Year' in df.columns:
         print(df['Birth Year'].max())
     else:
         print('\n Birth year does not exist')
-    
+
     if 'Birth Year' in df.columns:
         print(df['Birth Year'].mode())
     else:
         print('\n The Birth year doesn\'t exist')
-    
+
     print("\n This took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    
+
 def raw_data(df):
-    
+    # Ask user if they'd like to see five additional lines of code
     index = 0
-    
+
     while True:
-        
+
         display_data = input('\n Would you like to see 5 additional lines of raw data? Yes or No?').lower()
         if display_data in ('yes', 'y'):
             print(df.iloc[index:index+5])
@@ -208,9 +208,9 @@ def raw_data(df):
             if display_data in ('no', 'n'):
                 print ('\n Thank you!')
         break
-        
+
 def main():
-    
+
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
@@ -228,5 +228,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
