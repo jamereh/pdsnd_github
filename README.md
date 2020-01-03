@@ -5,7 +5,7 @@ This project was created on January 3rd, 2020
 Bikeshare Python Application
 
 ### Description
-Describe what your project is about and what it does
+This projects allows users to search for bikeshare data from three cities (Chicago, Washington DC, and New York City). The application will display data like most popular start and stop station, share of female riders, etc.
 
 ### Files used
 Include the files used
