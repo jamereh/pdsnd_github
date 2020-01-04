@@ -148,11 +148,11 @@ def trip_duration_stats(df):
 
     # TO DO: display total travel time
     total_travel_time = df['Trip Duration'].sum()
-    print('\nThe total travel time is:', total_travel_time)
+    print('\nThe total travel time is: {}'.format(total_travel_time))
 
     # TO DO: display mean travel time
     mean_travel_time = df['Trip Duration'].mean()
-    print('\nThe mean travel time is:', mean_travel_time)
+    print('\nThe mean travel time is: {}'.format(mean_travel_time))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -194,7 +194,13 @@ def user_stats(df):
     print('-'*40)
 
 def raw_data(df):
+<<<<<<< HEAD
     # Ask user if they'd like to see five additional lines of code
+||||||| 78e9d5b
+    
+=======
+
+>>>>>>> refactoring
     index = 0
 
     while True:
@@ -205,10 +211,20 @@ def raw_data(df):
             index += 5
             continue
         else:
+<<<<<<< HEAD
             if display_data in ('no', 'n'):
                 print ('\n Thank you!')
         break
 
+||||||| 78e9d5b
+            if display_data in ('no', 'n'):
+                print ('\n Thank you!')
+        break
+        
+=======
+            break
+
+>>>>>>> refactoring
 def main():
 
     while True:
